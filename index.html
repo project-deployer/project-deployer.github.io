@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9830107994126473"
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
@@ -31,12 +33,13 @@
             background-attachment: fixed;
             font-family: 'Poppins', sans-serif;
             color: white;
-            padding: 20px 10px;
+            padding: 15px; /* Reduced padding for mobile */
             box-sizing: border-box;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         .main-header {
-            font-size: 1.6rem;
+            font-size: 1.4rem; /* Adjusted for mobile */
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -49,9 +52,10 @@
         .calc-container {
             background: var(--glass);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); /* Safari support */
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 20px;
+            padding: 15px;
             width: 100%;
             max-width: 500px;
             box-sizing: border-box;
@@ -68,7 +72,7 @@
 
         .tab-btn {
             flex: 1;
-            padding: 10px;
+            padding: 12px; /* Larger touch target */
             border: none;
             background: none;
             color: white;
@@ -77,6 +81,7 @@
             cursor: pointer;
             border-radius: 8px;
             transition: 0.3s;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .tab-btn.active { background: var(--accent); color: #1a2a6c; }
@@ -84,7 +89,7 @@
         .calc-section { display: none; }
         .calc-section.active { display: block; }
 
-        h1 { text-align: center; margin-bottom: 15px; font-size: 0.9rem; opacity: 0.7; letter-spacing: 1px; }
+        h1 { text-align: center; margin-bottom: 15px; font-size: 0.85rem; opacity: 0.7; letter-spacing: 1px; }
 
         input, select {
             flex: 1;
@@ -93,50 +98,53 @@
             color: white;
             padding: 12px;
             border-radius: 8px;
-            font-size: 0.85rem;
+            font-size: 16px; /* Prevents auto-zoom on iPhone */
             outline: none;
+            width: 100%;
         }
 
         .subject-list { 
             margin-top: 10px; 
-            max-height: 40vh; 
+            max-height: 50vh; /* Slightly taller for mobile scrolls */
             overflow-y: auto; 
             padding-right: 5px; 
         }
 
         .subject-item, .cgpa-row {
             display: flex;
+            flex-direction: row; /* Keep row layout unless very narrow */
             justify-content: space-between;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             background: rgba(255, 255, 255, 0.05);
             margin-bottom: 8px;
             padding: 12px;
             border-radius: 10px;
         }
 
-        .subject-name { flex: 2; font-size: 0.85rem; }
+        .subject-name { flex: 2; font-size: 0.8rem; line-height: 1.2; }
         
         .remove-btn {
             background: var(--danger);
             color: white;
             border: none;
             border-radius: 6px;
-            padding: 8px 12px;
+            padding: 10px 14px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .btn {
             width: 100%;
-            padding: 14px;
+            padding: 16px; /* Larger touch area for thumbs */
             border: none;
             border-radius: 10px;
             font-weight: 600;
             text-transform: uppercase;
             cursor: pointer;
             margin-top: 10px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-calc { background: linear-gradient(90deg, var(--accent-2), var(--accent)); color: #1a2a6c; }
@@ -145,28 +153,32 @@
         .result-display {
             margin: 20px 0;
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: bold;
             display: none;
             color: var(--accent);
         }
 
-        .terms-section { margin-top: 20px; text-align: center; }
+        .terms-section { margin-top: 20px; text-align: center; padding-bottom: 20px;}
         .terms-btn { font-size: 0.75rem; color: var(--accent); text-decoration: underline; cursor: pointer; }
-        .terms-box {
-            display: none;
-            margin-top: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            text-align: left;
-            color: #ddd;
-            border: 1px solid var(--glass-border);
+        
+        footer {
+            margin-top: auto;
+            padding: 20px 0;
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+        footer a { color: white; text-decoration: none; margin: 0 5px; }
+
+        /* Small mobile optimization */
+        @media (max-width: 360px) {
+            .subject-item { flex-direction: column; align-items: flex-start; }
+            .subject-grade-select { width: 100%; }
         }
 
-        ::-webkit-scrollbar { width: 3px; }
-        ::-webkit-scrollbar-thumb { background: var(--accent); }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -204,11 +216,11 @@
     </div>
 
     <div id="cgpa-section" class="calc-section">
-        <h1>Overall Performance (Equal Weightage)</h1>
+        <h1>Overall Performance</h1>
         <div id="cgpa-rows" class="subject-list">
             <div class="cgpa-row">
                 <span class="subject-name sem-label">Semester 1</span>
-                <input type="number" step="0.01" class="sem-sgpa" placeholder="Enter SGPA" style="max-width: 120px;">
+                <input type="number" step="0.01" class="sem-sgpa" placeholder="SGPA" style="max-width: 100px;">
                 <div style="width: 40px;"></div>
             </div>
         </div>
@@ -219,11 +231,17 @@
 
     <div class="terms-section">
         <span class="terms-btn" onclick="toggleTerms()">Terms & Conditions</span>
-        <div id="termsBox" class="terms-box">
+        <div id="termsBox" class="terms-box" style="display: none; margin-top: 10px; background: rgba(0, 0, 0, 0.3); padding: 12px; border-radius: 8px; font-size: 0.7rem; text-align: left; color: #ddd; border: 1px solid var(--glass-border);">
             <strong>Disclaimer:</strong> This calculator assumes equal weightage for all semesters. CGPA is the arithmetic mean of all entered SGPAs. Verify with official records.
         </div>
     </div>
 </div>
+
+<footer>
+  <a href="about.html">About</a> |
+  <a href="privacy-policy.html">Privacy Policy</a> |
+  <a href="contact.html">Contact</a>
+</footer>
 
 <script>
     const curriculum = {
@@ -272,7 +290,7 @@
             area.innerHTML += `
                 <div class="subject-item">
                     <span class="subject-name">${sub.n} (${sub.c}c)</span>
-                    <select id="g-${i}" class="subject-grade-select" data-credits="${sub.c}">
+                    <select id="g-${i}" class="subject-grade-select" data-credits="${sub.c}" style="max-width:100px;">
                         <option value="">Grade</option>
                         ${Object.keys(gradeMap).map(g => `<option value="${g}">${g}</option>`).join('')}
                     </select>
@@ -309,7 +327,7 @@
         row.className = 'cgpa-row';
         row.innerHTML = `
             <span class="subject-name sem-label">Semester</span>
-            <input type="number" step="0.01" class="sem-sgpa" placeholder="Enter SGPA" style="max-width: 120px;">
+            <input type="number" step="0.01" class="sem-sgpa" placeholder="SGPA" style="max-width: 100px;">
             <button class="remove-btn" onclick="removeCgpaRow(this)">✕</button>
         `;
         container.appendChild(row);
@@ -357,12 +375,6 @@
         doc.save(`SGPA_Report_Y${yr}_S${sem}.pdf`);
     }
 </script>
-<footer>
-  <a href="about.html">About</a> |
-  <a href="privacy-policy.html">Privacy Policy</a> |
-  <a href="contact.html">Contact</a>
-</footer>
-
 
 </body>
 </html>
