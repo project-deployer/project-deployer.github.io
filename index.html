@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="zp9bEa59dZLt2_t6c3LV5GvTIeYxzIgnCLUH6yfA5PE" />
+    <title>AIML Grade Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    
+    <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --accent: #3ce26e;
+            --accent-2: #4facfe;
+            --danger: #ff4d4d;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background: radial-gradient(circle at top left, #1a2a6c, #b21f1f, #fdbb2d);
+            background-attachment: fixed;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            padding: 20px 10px;
+            box-sizing: border-box;
+        }
+
+        .main-header {
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 100%;
+        }
+
+        .calc-container {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .tabs {
+            display: flex;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            padding: 5px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: none;
+            color: white;
+            font-family: 'Poppins';
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active { background: var(--accent); color: #1a2a6c; }
+
+        .calc-section { display: none; }
+        .calc-section.active { display: block; }
+
+        h1 { text-align: center; margin-bottom: 15px; font-size: 0.9rem; opacity: 0.7; letter-spacing: 1px; }
+
+        input, select {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .subject-list { 
+            margin-top: 10px; 
+            max-height: 40vh; 
+            overflow-y: auto; 
+            padding-right: 5px; 
+        }
+
+        .subject-item, .cgpa-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 8px;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .subject-name { flex: 2; font-size: 0.85rem; }
+        
+        .remove-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+
+        .btn-calc { background: linear-gradient(90deg, var(--accent-2), var(--accent)); color: #1a2a6c; }
+        .btn-pdf { background: #e74c3c; color: white; display: none; }
+
+        .result-display {
+            margin: 20px 0;
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            display: none;
+            color: var(--accent);
+        }
+
+        .terms-section { margin-top: 20px; text-align: center; }
+        .terms-btn { font-size: 0.75rem; color: var(--accent); text-decoration: underline; cursor: pointer; }
+        .terms-box {
+            display: none;
+            margin-top: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            text-align: left;
+            color: #ddd;
+            border: 1px solid var(--glass-border);
+        }
+
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent); }
+    </style>
+</head>
+<body>
+
+<div class="main-header">AIML Grade Calculator</div>
+
+<div class="calc-container">
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('sgpa')">SGPA</button>
+        <button class="tab-btn" onclick="switchTab('cgpa')">CGPA</button>
+    </div>
+
+    <div id="sgpa-section" class="calc-section active">
+        <h1>Semester Grade Point Average</h1>
+        <div style="display:flex; gap:10px; margin-bottom:15px;">
+            <select id="yearSelect" onchange="loadSubjects()">
+                <option value="">Year</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+            </select>
+            <select id="semSelect" onchange="loadSubjects()">
+                <option value="">Semester</option>
+                <option value="1">Sem 1</option>
+                <option value="2">Sem 2</option>
+            </select>
+        </div>
+        <div id="subjectArea" class="subject-list">
+            <p style="text-align: center; opacity: 0.6; font-size: 0.8rem;">Select Year & Semester</p>
+        </div>
+        <button class="btn btn-calc" onclick="calculateSGPA()">Calculate SGPA</button>
+        <div id="sgpa-result" class="result-display"></div>
+        <button id="pdfBtn" class="btn btn-pdf" onclick="downloadPDF()">Download PDF</button>
+    </div>
+
+    <div id="cgpa-section" class="calc-section">
+        <h1>Overall Performance (Equal Weightage)</h1>
+        <div id="cgpa-rows" class="subject-list">
+            <div class="cgpa-row">
+                <span class="subject-name sem-label">Semester 1</span>
+                <input type="number" step="0.01" class="sem-sgpa" placeholder="Enter SGPA" style="max-width: 120px;">
+                <div style="width: 40px;"></div>
+            </div>
+        </div>
+        <button class="btn" style="background: rgba(255,255,255,0.1); color:white; margin-bottom:10px;" onclick="addCgpaRow()">+ Add Semester</button>
+        <button class="btn btn-calc" onclick="calculateCGPA()">Calculate CGPA</button>
+        <div id="cgpa-result" class="result-display"></div>
+    </div>
+
+    <div class="terms-section">
+        <span class="terms-btn" onclick="toggleTerms()">Terms & Conditions</span>
+        <div id="termsBox" class="terms-box">
+            <strong>Disclaimer:</strong> This calculator assumes equal weightage for all semesters. CGPA is the arithmetic mean of all entered SGPAs. Verify with official records.
+        </div>
+    </div>
+</div>
+
+<script>
+    const curriculum = {
+        "1-1": [{n: "Calculus & Linear Algebra", c: 4}, {n: "BEEE", c: 3}, {n: "Problem Solving through C", c: 4}, {n: "Quantum Physics", c: 4}, {n: "English Lab-I", c: 1.5}, {n: "Quantum Physics Lab", c: 1.5}, {n: "PSTC Lab", c: 1.5}, {n: "Intro to AI", c: 2}],
+        "1-2": [{n: "Discrete Mathematics", c: 4}, {n: "DLO", c: 4}, {n: "OOP through Java", c: 4}, {n: "Data Structures", c: 4}, {n: "IDEA Lab", c: 1}, {n: "Java Lab", c: 1.5}, {n: "DLCO Lab", c: 1.5}, {n: "DS Lab", c: 1.5}],
+        "2-1": [{n: "Math & Stat Foundations", c: 4}, {n: "Intro to Data Science", c: 3}, {n: "DAA", c: 4}, {n: "DBMS", c: 3}, {n: "Automata & Compiler", c: 4}, {n: "DAA Lab", c: 1.5}, {n: "DBMS Lab", c: 1.5}, {n: "Skill Dev Course-I", c: 1}],
+        "2-2": [{n: "Web Technologies", c: 3}, {n: "Operating Systems", c: 3}, {n: "Machine Learning", c: 4}, {n: "Computer Networks", c: 3}, {n: "AI", c: 4}, {n: "OS Lab", c: 1.5}, {n: "ML Lab", c: 1.5}, {n: "WT Lab", c: 1.5}, {n: "Skill Dev Course-II", c: 1}],
+        "3-1": [{n: "NLP", c: 4}, {n: "Software Engineering", c: 3}, {n: "Deep Learning", c: 4}, {n: "Knowledge Representation", c: 3}, {n: "Professional Elective-I", c: 3}, {n: "SE Lab", c: 1.5}, {n: "DL Lab", c: 1.5}, {n: "Mini Project-I", c: 1.5}, {n: "English Lab-II", c: 1.5}],
+        "3-2": [{n: "Intro to LLM", c: 4}, {n: "Professional Elective-II", c: 3}, {n: "Professional Elective-III", c: 3}, {n: "Industry Certification", c: 1.5}, {n: "Entrepreneurial Skill", c: 3}, {n: "Mini Project-II", c: 3}],
+        "4-1": [{n: "Professional Elective-IV", c: 3}, {n: "Professional Elective-V", c: 3}, {n: "Open Elective-II", c: 3}, {n: "Project-I", c: 6}],
+        "4-2": [{n: "Open Elective-III", c: 3}, {n: "Open Elective-IV", c: 3}, {n: "Project-II & Dissertation", c: 6}, {n: "Community Service", c: 2}]
+    };
+
+    const gradeMap = {"EX":10, "A":9, "B":8, "C":7, "D":6, "E":5, "F":0};
+    let calculatedSGPAValue = 0;
+
+    function switchTab(type) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.calc-section').forEach(s => s.classList.remove('active'));
+        if(type === 'sgpa') {
+            document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
+            document.getElementById('sgpa-section').classList.add('active');
+        } else {
+            document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+            document.getElementById('cgpa-section').classList.add('active');
+        }
+    }
+
+    function toggleTerms() {
+        const box = document.getElementById('termsBox');
+        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function loadSubjects() {
+        const yr = document.getElementById('yearSelect').value;
+        const sem = document.getElementById('semSelect').value;
+        const key = `${yr}-${sem}`;
+        const area = document.getElementById('subjectArea');
+        area.innerHTML = "";
+        const subs = curriculum[key] || [];
+        document.getElementById('sgpa-result').style.display = "none";
+        document.getElementById('pdfBtn').style.display = "none";
+        if (subs.length === 0) return;
+
+        subs.forEach((sub, i) => {
+            area.innerHTML += `
+                <div class="subject-item">
+                    <span class="subject-name">${sub.n} (${sub.c}c)</span>
+                    <select id="g-${i}" class="subject-grade-select" data-credits="${sub.c}">
+                        <option value="">Grade</option>
+                        ${Object.keys(gradeMap).map(g => `<option value="${g}">${g}</option>`).join('')}
+                    </select>
+                </div>`;
+        });
+    }
+
+    function calculateSGPA() {
+        const selects = document.querySelectorAll('.subject-grade-select');
+        let totalW = 0, totalC = 0, complete = true;
+        selects.forEach(sel => {
+            const g = sel.value;
+            const c = parseFloat(sel.dataset.credits);
+            if(!g) complete = false;
+            else { totalW += gradeMap[g] * c; totalC += c; }
+        });
+        if (!complete || totalC === 0) { alert("Please select all grades."); return; }
+        calculatedSGPAValue = (totalW / totalC).toFixed(2);
+        const display = document.getElementById('sgpa-result');
+        display.innerHTML = `SGPA: ${calculatedSGPAValue}`;
+        display.style.display = "block";
+        document.getElementById('pdfBtn').style.display = "block";
+    }
+
+    function updateSemLabels() {
+        document.querySelectorAll('.sem-label').forEach((label, index) => {
+            label.innerText = `Semester ${index + 1}`;
+        });
+    }
+
+    function addCgpaRow() {
+        const container = document.getElementById('cgpa-rows');
+        const row = document.createElement('div');
+        row.className = 'cgpa-row';
+        row.innerHTML = `
+            <span class="subject-name sem-label">Semester</span>
+            <input type="number" step="0.01" class="sem-sgpa" placeholder="Enter SGPA" style="max-width: 120px;">
+            <button class="remove-btn" onclick="removeCgpaRow(this)">✕</button>
+        `;
+        container.appendChild(row);
+        updateSemLabels();
+    }
+
+    function removeCgpaRow(btn) {
+        btn.parentElement.remove();
+        updateSemLabels();
+    }
+
+    function calculateCGPA() {
+        const sgpas = document.querySelectorAll('.sem-sgpa');
+        let total = 0, count = 0;
+        sgpas.forEach((input) => {
+            const val = parseFloat(input.value);
+            if(!isNaN(val)) {
+                total += val;
+                count++;
+            }
+        });
+        if(count === 0) { alert("Please enter at least one SGPA."); return; }
+        const cgpa = (total / count).toFixed(2);
+        const display = document.getElementById('cgpa-result');
+        display.innerHTML = `CGPA: ${cgpa}`;
+        display.style.display = "block";
+    }
+
+    function downloadPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const yr = document.getElementById('yearSelect').value;
+        const sem = document.getElementById('semSelect').value;
+        doc.setFontSize(18);
+        doc.text("AIML Semester Performance Report", 105, 20, { align: "center" });
+        doc.setFontSize(12);
+        doc.text(`Year: ${yr} | Semester: ${sem} | SGPA: ${calculatedSGPAValue}`, 14, 35);
+        const rows = [];
+        document.querySelectorAll('.subject-item').forEach((item, i) => {
+            const name = item.querySelector('.subject-name').innerText;
+            const grade = document.getElementById(`g-${i}`).value;
+            rows.push([name, grade]);
+        });
+        doc.autoTable({ startY: 45, head: [['Subject', 'Grade']], body: rows });
+        doc.save(`SGPA_Report_Y${yr}_S${sem}.pdf`);
+    }
+</script>
+<footer>
+  <a href="about.html">About</a> |
+  <a href="privacy-policy.html">Privacy Policy</a> |
+  <a href="contact.html">Contact</a>
+</footer>
+
+
+</body>
+</html>
