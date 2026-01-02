@@ -1,64 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9830107994126473"
-     crossorigin="anonymous">
-  </script>
-  <meta charset="UTF-8">
-  <title>About Us | Grade Calculator</title>
-  <meta name="description" content="About Grade Calculator - an independent educational tool for students to calculate grades, GPA and CGPA easily.">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9830107994126473"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Grade Calculator Portal</title>
+    <meta name="description" content="About Grade Calculator - an independent educational tool for students to calculate grades, GPA and CGPA easily.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #3b82f6;
+            --accent: #10b981;
+            --glass: rgba(255, 255, 255, 0.95);
+            --depth-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        body {
+            background: radial-gradient(circle at top left, #1a2a6c, #b21f1f, #fdbb2d);
+            background-attachment: fixed;
+            font-family: 'Poppins', sans-serif;
+            color: #1e293b;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: var(--depth-shadow);
+            flex: 1;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        /* 3D Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border: 1px solid #f1f5f9;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* Mission Statement Box */
+        .mission-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            padding: 40px;
+            border-radius: 24px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.1);
+        }
+
+        .mission-box h2 { color: var(--accent); }
+
+        .disclaimer-box {
+            background: #fff1f2;
+            border-left: 5px solid #f43f5e;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            margin-top: 40px;
+        }
+
+        footer {
+            background: rgba(0,0,0,0.85);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+        }
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-container { margin: 20px; padding: 30px 20px; }
+            .hero-section h1 { font-size: 1.8rem; }
+        }
+    </style>
 </head>
 <body>
 
-<h1>About Grade Calculator</h1>
+<div class="main-container">
+    <div class="hero-section">
+        <h1>About Grade Calculator</h1>
+        <p>Simplifying Academic Success for Future Engineers</p>
+    </div>
 
-<p>
-Grade Calculator is a free online educational tool designed to help students
-calculate grades, percentages, GPA, and CGPA quickly and accurately.
-</p>
+    <p style="text-align: center; line-height: 1.8; opacity: 0.8;">
+        Grade Calculator is a free, student-led online educational portal designed to help university students 
+        navigate the complexities of 10-point grading systems, specifically optimized for Artificial Intelligence (AI) 
+        and Machine Learning (ML) curriculums.
+    </p>
 
-<h2>Who We Are</h2>
-<p>
-This website is created and maintained by students with the aim of simplifying
-academic calculations. It is especially useful for engineering and technology
-students, including those studying Artificial Intelligence (AI) and Machine
-Learning (ML).
-</p>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <i class="fas fa-users"></i>
+            <h3>Who We Are</h3>
+            <p>A community-driven platform created by students to help peers manage academic records effectively.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-bolt"></i>
+            <h3>Fast & Precise</h3>
+            <p>Calculations are performed instantly in your browser. No registration or data collection required.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>Device Ready</h3>
+            <p>Fully responsive design that works perfectly on mobile phones, tablets, and desktop computers.</p>
+        </div>
+    </div>
 
-<h2>Our Mission</h2>
-<p>
-Our mission is to reduce errors caused by manual grade calculations and to
-provide a simple, fast, and reliable platform that students can use without
-registration or payment.
-</p>
+    <div class="mission-box">
+        <h2><i class="fas fa-bullseye"></i> Our Mission</h2>
+        <p>
+            To empower students with transparent academic tracking tools. We aim to reduce the stress of manual 
+            calculations, allowing students to focus more on learning and less on math errors.
+        </p>
+    </div>
 
-<h2>Who Can Use This Website</h2>
-<ul>
-  <li>School students</li>
-  <li>Engineering students</li>
-  <li>AI & ML students</li>
-  <li>College students and educators</li>
-</ul>
+    <h2>Who Can Benefit?</h2>
+    <ul style="line-height: 2;">
+        <li><strong>Engineering Students:</strong> Especially those in AIML, CSE, and ECE branches.</li>
+        <li><strong>RGUKT Scholars:</strong> Specifically tailored to the unique credit systems of RGUKT campuses.</li>
+        <li><strong>Educators:</strong> Quick tool for verifying grade distributions.</li>
+    </ul>
 
-<h2>Why Choose Our Tool</h2>
-<p>
-Grade Calculator works smoothly on mobile phones, tablets, and laptops.
-It is lightweight, easy to use, and continuously improved based on student needs.
-</p>
-
-<h2>Independent Platform Disclaimer</h2>
-<p>
-This website is an independent, student-created educational tool. It is NOT an
-official website of any university or institution. Any reference to educational
-institutions or programs is for informational purposes only.
-</p>
+    <div class="disclaimer-box">
+        <strong>Independent Platform Disclaimer:</strong> 
+        This website is an independent, student-created educational tool. It is NOT an official website of 
+        any university or institution. Any reference to educational institutions (like RGUKT AP) is for 
+        informational and comparative purposes only. For official results, always refer to your university's 
+        student portal.
+    </div>
+</div>
 
 <footer>
-  <p>
     <a href="index.html">Home</a> |
+    <a href="how-to-calculate-sgpa.html">SGPA Guide</a> |
     <a href="privacy-policy.html">Privacy Policy</a> |
     <a href="contact.html">Contact</a>
-  </p>
 </footer>
 
 </body>
