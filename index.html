@@ -297,6 +297,26 @@
         div.innerHTML = `<span class="subject-name">Semester ${count}</span><input type="number" step="0.01" class="sem-sgpa" placeholder="SGPA" style="max-width: 100px;">`;
         container.appendChild(div);
     }
+    function downloadPDF() {
+        const {jsPDF} =window.jspdf;
+        const doc = new jsPDF();
+        const yr = document.getElem entByld('yearSelect').value;
+        const sem = document.getEl ementByld('semSelect').value;
+        doc.setFontSize(18);
+        doc.text("AIML Semester
+        Performance Report", 105, 20,{ align: "center" });
+        doc.setFontSize(12);
+        doc.text('Year: ${yr} |
+        Semester: ${sem} | SGPA: $ {calculatedSGPAValue}, 14, 35);
+        const rows = [];
+        document.querySelectorAll('.
+        subject-item').forEach((item, i) => {
+        const name = item.querySelector('.subject-name').innerText;
+        Const grade=document.getElementByld('g-${i ).value;
+        rows.push([name, grade]);
+        doc.autoTable({ startY: 45, head: [['Subject', 'Grade']], body: rows });
+        doc.save('SGPA_Report_Y$ {yr}_S${sem}.pdf');
+        }
 </script>
 </body>
 </html>
