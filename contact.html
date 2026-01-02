@@ -1,52 +1,188 @@
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9830107994126473"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9830107994126473"
      crossorigin="anonymous"></script>
-  <meta charset="UTF-8">
-  <title>Contact Us | Grade Calculator</title>
-  <meta name="description" content="Contact Grade Calculator for feedback, suggestions, or support.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Grade Calculator</title>
+    <meta name="description" content="Contact Grade Calculator for feedback, suggestions, or support.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #3b82f6;
+            --accent: #10b981;
+            --glass: rgba(255, 255, 255, 0.95);
+            --depth-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        body {
+            background: radial-gradient(circle at top left, #1a2a6c, #b21f1f, #fdbb2d);
+            background-attachment: fixed;
+            font-family: 'Poppins', sans-serif;
+            color: #1e293b;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 45px;
+            box-shadow: var(--depth-shadow);
+            flex: 1;
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 40px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border: 1px solid #f1f5f9;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h2 {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-card h2 i {
+            margin-right: 12px;
+        }
+
+        .email-highlight {
+            background: #f0fdf4;
+            color: var(--primary);
+            padding: 15px;
+            border-radius: 12px;
+            display: inline-block;
+            font-weight: 700;
+            word-break: break-all;
+            border: 1px dashed var(--accent);
+        }
+
+        ul {
+            padding-left: 20px;
+            line-height: 2;
+        }
+
+        .dark-section {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        .dark-section h2 { color: var(--accent); margin-top: 0; }
+
+        footer {
+            background: rgba(0,0,0,0.85);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-container { margin: 15px; padding: 25px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
 </head>
 <body>
 
-<h1>Contact Us</h1>
+<div class="main-container">
+    <h1>Contact Us</h1>
+    <p class="subtitle">We value your academic journey and feedback.</p>
 
-<p>
-If you have suggestions, feedback, or face any issues with our grade calculator,
-feel free to contact us.
-</p>
+    <p style="text-align: center; line-height: 1.8;">
+        If you have suggestions, feedback, or face any issues with our grade calculator, 
+        feel free to contact us.
+    </p>
 
-<h2>Email Support</h2>
-<p>
-Email: <strong>balaswamynaik569@gmail.com</strong>
-</p>
+    <div class="contact-grid">
+        <div class="info-card">
+            <h2><i class="fas fa-envelope"></i> Email Support</h2>
+            <p>Email: <br><span class="email-highlight">balaswamynaik569@gmail.com</span></p>
+        </div>
 
-<h2>Response Time</h2>
-<p>
-We usually respond within 24–48 hours. This is an independent educational website,
-and support is provided on a best-effort basis.
-</p>
+        <div class="info-card">
+            <h2><i class="fas fa-clock"></i> Response Time</h2>
+            <p>
+                We usually respond within 24–48 hours. This is an independent educational website, 
+                and support is provided on a best-effort basis.
+            </p>
+        </div>
+    </div>
 
-<h2>Purpose of Contact</h2>
-<ul>
-  <li>Report calculation issues</li>
-  <li>Suggest new features (GPA / CGPA calculators)</li>
-  <li>General feedback</li>
-</ul>
+    <div class="info-card" style="margin-bottom: 25px;">
+        <h2><i class="fas fa-bullseye"></i> Purpose of Contact</h2>
+        <ul>
+            <li>Report calculation issues</li>
+            <li>Suggest new features (GPA / CGPA calculators)</li>
+            <li>General feedback</li>
+        </ul>
+    </div>
 
-<h2>Data Usage</h2>
-<p>
-Any information shared via email will be used only to respond to your message and
-will not be shared with third parties.
-</p>
+    <div class="dark-section">
+        <h2><i class="fas fa-user-lock"></i> Data Usage</h2>
+        <p>
+            Any information shared via email will be used only to respond to your message and 
+            will not be shared with third parties.
+        </p>
+    </div>
+</div>
 
 <footer>
-  <p>
     <a href="index.html">Home</a> |
     <a href="about.html">About</a> |
     <a href="privacy-policy.html">Privacy Policy</a>
-  </p>
 </footer>
 
 </body>
