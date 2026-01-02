@@ -2,14 +2,11 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9830107994126473"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9830107994126473" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="zp9bEa59dZLt2_t6c3LV5GvTIeYxzIgnCLUH6yfA5PE" />
-    <title>AIML Grade Calculator</title>
+    <title>AIML Grade Calculator | RGUKT AP</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     
@@ -27,38 +24,41 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
             background: radial-gradient(circle at top left, #1a2a6c, #b21f1f, #fdbb2d);
             background-attachment: fixed;
             font-family: 'Poppins', sans-serif;
             color: white;
-            padding: 15px; /* Reduced padding for mobile */
             box-sizing: border-box;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
+        }
+
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
         }
 
         .main-header {
-            font-size: 1.4rem; /* Adjusted for mobile */
+            font-size: 1.4rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 20px;
             text-shadow: 0 4px 10px rgba(0,0,0,0.3);
             text-align: center;
-            width: 100%;
         }
 
         .calc-container {
             background: var(--glass);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); /* Safari support */
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 15px;
             width: 100%;
             max-width: 500px;
-            box-sizing: border-box;
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
@@ -72,7 +72,7 @@
 
         .tab-btn {
             flex: 1;
-            padding: 12px; /* Larger touch target */
+            padding: 12px;
             border: none;
             background: none;
             color: white;
@@ -81,38 +81,26 @@
             cursor: pointer;
             border-radius: 8px;
             transition: 0.3s;
-            -webkit-tap-highlight-color: transparent;
         }
 
         .tab-btn.active { background: var(--accent); color: #1a2a6c; }
-
         .calc-section { display: none; }
         .calc-section.active { display: block; }
 
-        h1 { text-align: center; margin-bottom: 15px; font-size: 0.85rem; opacity: 0.7; letter-spacing: 1px; }
-
         input, select {
-            flex: 1;
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--glass-border);
             color: white;
             padding: 12px;
             border-radius: 8px;
-            font-size: 16px; /* Prevents auto-zoom on iPhone */
-            outline: none;
+            font-size: 16px;
             width: 100%;
+            box-sizing: border-box;
         }
 
-        .subject-list { 
-            margin-top: 10px; 
-            max-height: 50vh; /* Slightly taller for mobile scrolls */
-            overflow-y: auto; 
-            padding-right: 5px; 
-        }
-
+        .subject-list { margin-top: 10px; max-height: 50vh; overflow-y: auto; }
         .subject-item, .cgpa-row {
             display: flex;
-            flex-direction: row; /* Keep row layout unless very narrow */
             justify-content: space-between;
             align-items: center;
             gap: 10px;
@@ -122,214 +110,124 @@
             border-radius: 10px;
         }
 
-        .subject-name { flex: 2; font-size: 0.8rem; line-height: 1.2; }
-        
-        .remove-btn {
-            background: var(--danger);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 10px 14px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 16px; /* Larger touch area for thumbs */
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            cursor: pointer;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        .subject-name { flex: 2; font-size: 0.8rem; }
+        .btn { width: 100%; padding: 16px; border: none; border-radius: 10px; font-weight: 600; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
         .btn-calc { background: linear-gradient(90deg, var(--accent-2), var(--accent)); color: #1a2a6c; }
-        .btn-pdf { background: #e74c3c; color: white; display: none; }
+        .result-display { margin: 20px 0; text-align: center; font-size: 2rem; font-weight: bold; color: var(--accent); display: none; }
 
-        .result-display {
-            margin: 20px 0;
-            text-align: center;
-            font-size: 2rem;
-            font-weight: bold;
-            display: none;
-            color: var(--accent);
+        /* Content Section Styling */
+        .content-section {
+            max-width: 800px;
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            line-height: 1.6;
         }
+        .content-section h2 { color: var(--accent); font-size: 1.2rem; margin-top: 20px; border-bottom: 1px solid var(--glass-border); padding-bottom: 5px; }
+        .content-section p, .content-section ul { font-size: 0.9rem; opacity: 0.9; }
+        .disclaimer { font-size: 0.8rem; color: #ffbcbc; border-top: 1px dashed var(--glass-border); margin-top: 30px; padding-top: 15px; }
 
-        .terms-section { margin-top: 20px; text-align: center; padding-bottom: 20px;}
-        .terms-btn { font-size: 0.75rem; color: var(--accent); text-decoration: underline; cursor: pointer; }
-        
         footer {
-            margin-top: auto;
-            padding: 20px 0;
-            font-size: 0.8rem;
-            opacity: 0.8;
+            margin-top: 50px;
+            padding: 30px 15px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
             text-align: center;
+            border-top: 1px solid var(--glass-border);
+            width: 100%;
         }
-        footer a { color: white; text-decoration: none; margin: 0 5px; }
-
-        /* Small mobile optimization */
-        @media (max-width: 360px) {
-            .subject-item { flex-direction: column; align-items: flex-start; }
-            .subject-grade-select { width: 100%; }
-        }
-
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+        footer a { color: var(--accent); text-decoration: none; margin: 0 10px; font-weight: 600; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    
+<div class="main-wrapper">
+    <div class="main-header">AIML Grade Calculator</div>
 
-<div class="main-header">AIML Grade Calculator</div>
-
-<div class="calc-container">
-    <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('sgpa')">SGPA</button>
-        <button class="tab-btn" onclick="switchTab('cgpa')">CGPA</button>
-    </div>
-
-    <div id="sgpa-section" class="calc-section active">
-        <h1>Semester Grade Point Average</h1>
-        <div style="display:flex; gap:10px; margin-bottom:15px;">
-            <select id="yearSelect" onchange="loadSubjects()">
-                <option value="">Year</option>
-                <option value="1">1st Year</option>
-                <option value="2">2nd Year</option>
-                <option value="3">3rd Year</option>
-                <option value="4">4th Year</option>
-            </select>
-            <select id="semSelect" onchange="loadSubjects()">
-                <option value="">Semester</option>
-                <option value="1">Sem 1</option>
-                <option value="2">Sem 2</option>
-            </select>
+    <div class="calc-container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('sgpa')">SGPA</button>
+            <button class="tab-btn" onclick="switchTab('cgpa')">CGPA</button>
         </div>
-        <div id="subjectArea" class="subject-list">
-            <p style="text-align: center; opacity: 0.6; font-size: 0.8rem;">Select Year & Semester</p>
-        </div>
-        <button class="btn btn-calc" onclick="calculateSGPA()">Calculate SGPA</button>
-        <div id="sgpa-result" class="result-display"></div>
-        <button id="pdfBtn" class="btn btn-pdf" onclick="downloadPDF()">Download PDF</button>
-    </div>
 
-    <div id="cgpa-section" class="calc-section">
-        <h1>Overall Performance</h1>
-        <div id="cgpa-rows" class="subject-list">
-            <div class="cgpa-row">
-                <span class="subject-name sem-label">Semester 1</span>
-                <input type="number" step="0.01" class="sem-sgpa" placeholder="SGPA" style="max-width: 100px;">
-                <div style="width: 40px;"></div>
+        <div id="sgpa-section" class="calc-section active">
+            <div style="display:flex; gap:10px; margin-bottom:15px;">
+                <select id="yearSelect" onchange="loadSubjects()">
+                    <option value="">Year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
+                <select id="semSelect" onchange="loadSubjects()">
+                    <option value="">Semester</option>
+                    <option value="1">Sem 1</option>
+                    <option value="2">Sem 2</option>
+                </select>
             </div>
+            <div id="subjectArea" class="subject-list">
+                <p style="text-align: center; opacity: 0.6; font-size: 0.8rem;">Select Year & Semester</p>
+            </div>
+            <button class="btn btn-calc" onclick="calculateSGPA()">Calculate SGPA</button>
+            <div id="sgpa-result" class="result-display"></div>
+            <button id="pdfBtn" class="btn" style="background: #e74c3c; color: white; display: none;" onclick="downloadPDF()">Download PDF</button>
         </div>
-        <button class="btn" style="background: rgba(255,255,255,0.1); color:white; margin-bottom:10px;" onclick="addCgpaRow()">+ Add Semester</button>
-        <button class="btn btn-calc" onclick="calculateCGPA()">Calculate CGPA</button>
-        <div id="cgpa-result" class="result-display"></div>
+
+        <div id="cgpa-section" class="calc-section">
+            <div id="cgpa-rows" class="subject-list">
+                <div class="cgpa-row">
+                    <span class="subject-name sem-label">Semester 1</span>
+                    <input type="number" step="0.01" class="sem-sgpa" placeholder="SGPA" style="max-width: 100px;">
+                </div>
+            </div>
+            <button class="btn" style="background: rgba(255,255,255,0.1); color:white;" onclick="addCgpaRow()">+ Add Semester</button>
+            <button class="btn btn-calc" onclick="calculateCGPA()">Calculate CGPA</button>
+            <div id="cgpa-result" class="result-display"></div>
+        </div>
     </div>
 
-    <div class="terms-section">
-        <span class="terms-btn" onclick="toggleTerms()">Terms & Conditions</span>
-        <div id="termsBox" class="terms-box" style="display: none; margin-top: 10px; background: rgba(0, 0, 0, 0.3); padding: 12px; border-radius: 8px; font-size: 0.7rem; text-align: left; color: #ddd; border: 1px solid var(--glass-border);">
-            <strong>Disclaimer:</strong> This calculator assumes equal weightage for all semesters. CGPA is the arithmetic mean of all entered SGPAs. Verify with official records.
+    <div class="content-section">
+        <h2>Grade Calculator for RGUKT AP Students (AI & ML)</h2>
+        <p>Rajiv Gandhi University of Knowledge Technologies (RGUKT), Andhra Pradesh (AP) offers engineering programs in emerging fields such as Artificial Intelligence (AI) and Machine Learning (ML). Students from RGUKT AP often need quick and accurate ways to calculate grades, percentages, and academic performance for self-evaluation.</p>
+
+        <h2>Why Grade Calculation Is Important for AI & ML Students</h2>
+        <p>AI and ML students study subjects like Python Programming, Data Structures, Statistics, Linear Algebra, Artificial Intelligence, and Machine Learning. Tracking academic performance across these subjects helps students understand their strengths and areas that need improvement.</p>
+        <p>This online grade calculator helps students estimate grades based on marks obtained in examinations. It reduces manual calculation errors and saves time.</p>
+
+        <h2>How Students Can Use This Grade Calculator</h2>
+        <ul>
+            <li>Enter marks obtained in exams or assessments</li>
+            <li>Instantly calculate grades or percentages</li>
+            <li>Use results for self-assessment and planning</li>
+            <li>Helpful for AI & ML academic tracking</li>
+        </ul>
+
+        <h2>Who Can Use This Tool?</h2>
+        <p>This tool is designed for engineering students, including those studying at RGUKT AP, who want a simple and fast way to calculate grades. It works on mobile phones and laptops without requiring login or registration.</p>
+
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> This website is an independent, student-created educational tool and is NOT an official website of Rajiv Gandhi University of Knowledge Technologies (RGUKT), Andhra Pradesh (AP). The name RGUKT AP is used only for reference purposes. This website does not represent, affiliate with, or is endorsed by RGUKT AP or any of its campuses. For official academic information, students should refer to the official RGUKT website.
         </div>
     </div>
 </div>
-<section>
-<h2>Grade Calculator for RGUKT AP Students (AI & ML)</h2>
-
-<p>
-Rajiv Gandhi University of Knowledge Technologies (RGUKT), Andhra Pradesh (AP)
-offers engineering programs in emerging fields such as Artificial Intelligence
-(AI) and Machine Learning (ML). Students from RGUKT AP often need quick and
-accurate ways to calculate grades, percentages, and academic performance
-for self-evaluation.
-</p>
-
-<h2>Why Grade Calculation Is Important for AI & ML Students</h2>
-
-<p>
-AI and ML students study subjects like Python Programming, Data Structures,
-Statistics, Linear Algebra, Artificial Intelligence, and Machine Learning.
-Tracking academic performance across these subjects helps students understand
-their strengths and areas that need improvement.
-</p>
-
-<p>
-This online grade calculator helps students estimate grades based on marks
-obtained in examinations. It reduces manual calculation errors and saves time.
-</p>
-
-<h2>How Students Can Use This Grade Calculator</h2>
-
-<ul>
-<li>Enter marks obtained in exams or assessments</li>
-<li>Instantly calculate grades or percentages</li>
-<li>Use results for self-assessment and planning</li>
-<li>Helpful for AI & ML academic tracking</li>
-</ul>
-
-<h2>Who Can Use This Tool?</h2>
-
-<p>
-This tool is designed for engineering students, including those studying at
-RGUKT AP, who want a simple and fast way to calculate grades. It works on
-mobile phones and laptops without requiring login or registration.
-</p>
-
-</section>
-<section>
-<h2>Disclaimer</h2>
-<p>
-This website is an independent, student-created educational tool and is NOT an
-official website of Rajiv Gandhi University of Knowledge Technologies (RGUKT),
-Andhra Pradesh (AP). The name RGUKT AP is used only for reference purposes.
-</p>
-
-<p>
-This website does not represent, affiliate with, or is endorsed by RGUKT AP or
-any of its campuses. For official academic information, students should refer
-to the official RGUKT website.
-</p>
-<h2>CGPA to Percentage conersion</h2>
-<p>
-    formula for Conversion of CGPA into its equivalent percentage of marks:
-    Based on the recommendation of the Professor In-charge of Control of Exams
-(PICE) and after careful analytical study of the pattern of conversion formula of
-various Universities in AP and premier institutes and in pursuance of the Vice
-Chancellors orders referred above, it is here by informed that the following
-conversion formula be applied for the computation of average percentage of marks
-from CGPA.
-Average percentage of marks = CGPA*10
-This order is issued subject to the ratification of the ensuing meeting of Governing
-Council
-</p>
-</section>
 
 <footer>
-  <a href="SGPA Master Guide.html">SGPA Guide</a>|
-  <a href="about.html">About</a> |
-  <a href="privacy-policy.html">Privacy Policy</a> |
-  <a href="contact.html">Contact</a>
+    <a href="how-to-calculate-sgpa.html">SGPA Guide</a> |
+    <a href="about.html">About</a> |
+    <a href="privacy-policy.html">Privacy</a> |
+    <a href="contact.html">Contact</a>
 </footer>
 
 <script>
     const curriculum = {
         "1-1": [{n: "Calculus & Linear Algebra", c: 4}, {n: "BEEE", c: 3}, {n: "Problem Solving through C", c: 4}, {n: "Quantum Physics", c: 4}, {n: "English Lab-I", c: 1.5}, {n: "Quantum Physics Lab", c: 1.5}, {n: "PSTC Lab", c: 1.5}, {n: "Intro to AI", c: 2}],
         "1-2": [{n: "Discrete Mathematics", c: 4}, {n: "DLO", c: 4}, {n: "OOP through Java", c: 4}, {n: "Data Structures", c: 4}, {n: "IDEA Lab", c: 1}, {n: "Java Lab", c: 1.5}, {n: "DLCO Lab", c: 1.5}, {n: "DS Lab", c: 1.5}],
-        "2-1": [{n: "Math & Stat Foundations", c: 4}, {n: "Intro to Data Science", c: 3}, {n: "DAA", c: 4}, {n: "DBMS", c: 3}, {n: "Automata & Compiler", c: 4}, {n: "DAA Lab", c: 1.5}, {n: "DBMS Lab", c: 1.5}, {n: "Skill Dev Course-I", c: 1}],
-        "2-2": [{n: "Web Technologies", c: 3}, {n: "Operating Systems", c: 3}, {n: "Machine Learning", c: 4}, {n: "Computer Networks", c: 3}, {n: "AI", c: 4}, {n: "OS Lab", c: 1.5}, {n: "ML Lab", c: 1.5}, {n: "WT Lab", c: 1.5}, {n: "Skill Dev Course-II", c: 1}],
-        "3-1": [{n: "NLP", c: 4}, {n: "Software Engineering", c: 3}, {n: "Deep Learning", c: 4}, {n: "Knowledge Representation", c: 3}, {n: "Professional Elective-I", c: 3}, {n: "SE Lab", c: 1.5}, {n: "DL Lab", c: 1.5}, {n: "Mini Project-I", c: 1.5}, {n: "English Lab-II", c: 1.5}],
-        "3-2": [{n: "Intro to LLM", c: 4}, {n: "Professional Elective-II", c: 3}, {n: "Professional Elective-III", c: 3}, {n: "Industry Certification", c: 1.5}, {n: "Entrepreneurial Skill", c: 3}, {n: "Mini Project-II", c: 3}],
-        "4-1": [{n: "Professional Elective-IV", c: 3}, {n: "Professional Elective-V", c: 3}, {n: "Open Elective-II", c: 3}, {n: "Project-I", c: 6}],
-        "4-2": [{n: "Open Elective-III", c: 3}, {n: "Open Elective-IV", c: 3}, {n: "Project-II & Dissertation", c: 6}, {n: "Community Service", c: 2}]
+        "2-1": [{n: "Math & Stat Foundations", c: 4}, {n: "Intro to Data Science", c: 3}, {n: "DAA", c: 4}, {n: "DBMS", c: 3}, {n: "Automata & Compiler", c: 4}, {n: "DAA Lab", c: 1.5}, {n: "DBMS Lab", c: 1.5}, {n: "Skill Dev Course-I", c: 1}]
     };
 
     const gradeMap = {"EX":10, "A":9, "B":8, "C":7, "D":6, "E":5, "F":0};
-    let calculatedSGPAValue = 0;
 
     function switchTab(type) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -343,11 +241,6 @@ Council
         }
     }
 
-    function toggleTerms() {
-        const box = document.getElementById('termsBox');
-        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-    }
-
     function loadSubjects() {
         const yr = document.getElementById('yearSelect').value;
         const sem = document.getElementById('semSelect').value;
@@ -355,8 +248,6 @@ Council
         const area = document.getElementById('subjectArea');
         area.innerHTML = "";
         const subs = curriculum[key] || [];
-        document.getElementById('sgpa-result').style.display = "none";
-        document.getElementById('pdfBtn').style.display = "none";
         if (subs.length === 0) return;
 
         subs.forEach((sub, i) => {
@@ -375,79 +266,35 @@ Council
         const selects = document.querySelectorAll('.subject-grade-select');
         let totalW = 0, totalC = 0, complete = true;
         selects.forEach(sel => {
-            const g = sel.value;
-            const c = parseFloat(sel.dataset.credits);
-            if(!g) complete = false;
-            else { totalW += gradeMap[g] * c; totalC += c; }
+            if(!sel.value) complete = false;
+            else { totalW += gradeMap[sel.value] * parseFloat(sel.dataset.credits); totalC += parseFloat(sel.dataset.credits); }
         });
-        if (!complete || totalC === 0) { alert("Please select all grades."); return; }
-        calculatedSGPAValue = (totalW / totalC).toFixed(2);
-        const display = document.getElementById('sgpa-result');
-        display.innerHTML = `SGPA: ${calculatedSGPAValue}`;
-        display.style.display = "block";
+        if (!complete || totalC === 0) { alert("Select all grades"); return; }
+        document.getElementById('sgpa-result').innerHTML = `SGPA: ${(totalW / totalC).toFixed(2)}`;
+        document.getElementById('sgpa-result').style.display = "block";
         document.getElementById('pdfBtn').style.display = "block";
-    }
-
-    function updateSemLabels() {
-        document.querySelectorAll('.sem-label').forEach((label, index) => {
-            label.innerText = `Semester ${index + 1}`;
-        });
-    }
-
-    function addCgpaRow() {
-        const container = document.getElementById('cgpa-rows');
-        const row = document.createElement('div');
-        row.className = 'cgpa-row';
-        row.innerHTML = `
-            <span class="subject-name sem-label">Semester</span>
-            <input type="number" step="0.01" class="sem-sgpa" placeholder="SGPA" style="max-width: 100px;">
-            <button class="remove-btn" onclick="removeCgpaRow(this)">✕</button>
-        `;
-        container.appendChild(row);
-        updateSemLabels();
-    }
-
-    function removeCgpaRow(btn) {
-        btn.parentElement.remove();
-        updateSemLabels();
     }
 
     function calculateCGPA() {
         const sgpas = document.querySelectorAll('.sem-sgpa');
         let total = 0, count = 0;
-        sgpas.forEach((input) => {
+        sgpas.forEach(input => {
             const val = parseFloat(input.value);
-            if(!isNaN(val)) {
-                total += val;
-                count++;
-            }
+            if(!isNaN(val)) { total += val; count++; }
         });
-        if(count === 0) { alert("Please enter at least one SGPA."); return; }
-        const cgpa = (total / count).toFixed(2);
-        const display = document.getElementById('cgpa-result');
-        display.innerHTML = `CGPA: ${cgpa}`;
-        display.style.display = "block";
+        if(count === 0) return;
+        document.getElementById('cgpa-result').innerHTML = `CGPA: ${(total/count).toFixed(2)}`;
+        document.getElementById('cgpa-result').style.display = "block";
     }
 
-    function downloadPDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        const yr = document.getElementById('yearSelect').value;
-        const sem = document.getElementById('semSelect').value;
-        doc.setFontSize(18);
-        doc.text("AIML Semester Performance Report", 105, 20, { align: "center" });
-        doc.setFontSize(12);
-        doc.text(`Year: ${yr} | Semester: ${sem} | SGPA: ${calculatedSGPAValue}`, 14, 35);
-        const rows = [];
-        document.querySelectorAll('.subject-item').forEach((item, i) => {
-            const name = item.querySelector('.subject-name').innerText;
-            const grade = document.getElementById(`g-${i}`).value;
-            rows.push([name, grade]);
-        });
-        doc.autoTable({ startY: 45, head: [['Subject', 'Grade']], body: rows });
-        doc.save(`SGPA_Report_Y${yr}_S${sem}.pdf`);
+    function addCgpaRow() {
+        const container = document.getElementById('cgpa-rows');
+        const count = document.querySelectorAll('.cgpa-row').length + 1;
+        const div = document.createElement('div');
+        div.className = 'cgpa-row';
+        div.innerHTML = `<span class="subject-name">Semester ${count}</span><input type="number" step="0.01" class="sem-sgpa" placeholder="SGPA" style="max-width: 100px;">`;
+        container.appendChild(div);
     }
 </script>
-
 </body>
 </html>
